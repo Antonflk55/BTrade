@@ -1,12 +1,14 @@
 import React from "react";
+import LivePrice from "./LivePrice";
 
-const MainChart = () => {
+const MainChart = ({ selectedStock }) => {
   return (
     <div className="flex-1 p-6">
-      <h2 className="text-2xl font-bold">Live Trading Chart</h2>
+      <h2 className="text-2xl font-bold">Live Chart for {selectedStock}</h2>
+      <LivePrice selectedStock={selectedStock} />
       <div className="mt-4">
         <iframe
-          src="https://www.tradingview.com/widgetembed/?frameElementId=tradingview_1&symbol=NASDAQ:AAPL&interval=D&width=100%25&height=400&hide_top_toolbar=1&hide_side_toolbar=1"
+          src={`https://www.tradingview.com/widgetembed/?frameElementId=tradingview_1&symbol=${selectedStock}&interval=D&width=100%25&height=400&hide_top_toolbar=1&hide_side_toolbar=1`}
           width="100%"
           height="400"
           allowTransparency="true"
