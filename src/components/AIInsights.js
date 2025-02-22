@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 const AIInsights = ({ selectedStock, indicators, newsSentiment }) => {
   const [insights, setInsights] = useState("Generating AI insights...");
-  
+
   useEffect(() => {
     const fetchAIInsights = async () => {
       try {
@@ -10,7 +10,7 @@ const AIInsights = ({ selectedStock, indicators, newsSentiment }) => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer YOUR_OPENAI_API_KEY`,
+            Authorization: `Bearer ${process.env.REACT_APP_OPENAI_KEY}`,
           },
           body: JSON.stringify({
             model: "gpt-3.5-turbo",

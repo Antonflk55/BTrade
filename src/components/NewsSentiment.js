@@ -7,7 +7,7 @@ const NewsSentiment = ({ selectedStock }) => {
     const fetchNews = async () => {
       try {
         const response = await fetch(
-          `https://newsapi.org/v2/everything?q=${selectedStock}&apiKey=YOUR_NEWSAPI_KEY`
+          `https://newsapi.org/v2/everything?q=${selectedStock}&apiKey=${process.env.REACT_APP_NEWSAPI_KEY}`
         );
         const data = await response.json();
         setNews(data.articles.slice(0, 5)); // Show only the top 5 news articles

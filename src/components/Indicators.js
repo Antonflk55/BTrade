@@ -6,9 +6,11 @@ const Indicators = ({ selectedStock }) => {
   useEffect(() => {
     const fetchIndicators = async () => {
       try {
-        const response = await fetch(`https://api.tradingview.com/indicators/${selectedStock}`);
+        const response = await fetch(
+          `https://www.alphavantage.co/query?function=MACD&symbol=${selectedStock}&interval=daily&apikey=${process.env.REACT_APP_ALPHA_KEY}`
+        );
         const data = await response.json();
-        setIndicators(data);
+        setIndicators(data["Technical Analysis: MACD"]);
       } catch (error) {
         console.error("Error fetching indicators:", error);
       }
@@ -25,12 +27,9 @@ const Indicators = ({ selectedStock }) => {
       <h3 className="text-lg font-bold">Technical Indicators</h3>
       {indicators ? (
         <ul className="mt-2">
-          <li>📈 <strong>EMA (50):</strong> {indicators.ema50}</li>
-          <li>📉 <strong>EMA (200):</strong> {indicators.ema200}</li>
-          <li>⚡ <strong>RVI:</strong> {indicators.rvi}</li>
-          <li>☁️ <strong>Ichimoku Cloud:</strong> {indicators.ichimoku}</li>
-          <li>📊 <strong>Keltner Channels:</strong> {indicators.keltner}</li>
-          <li>📈 <strong>OBV:</strong> {indicators.obv}</li>
+          <li>📈 **MACD:** {Object.values(indicators)[0]?.MACD}</li>
+          <li>📉 **RSI:** {Object.values(indicators)[0]?.RSI}</li>
+          <li>📊 **EMA 50:** {Object.values(indicators)[0]?.EMA50}</li>
         </ul>
       ) : (
         <p className="text-gray-500">Loading indicators...</p>

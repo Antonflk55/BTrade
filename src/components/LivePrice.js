@@ -6,9 +6,11 @@ const LivePrice = ({ selectedStock }) => {
   useEffect(() => {
     const fetchPrice = async () => {
       try {
-        const response = await fetch(`https://api.tradingview.com/symbols/${selectedStock}`);
+        const response = await fetch(
+          `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${selectedStock}&apikey=${process.env.REACT_APP_ALPHA_KEY}`
+        );
         const data = await response.json();
-        setPrice(data.price);
+        setPrice(data["Global Quote"]["05. price"]);
       } catch (error) {
         console.error("Error fetching price:", error);
       }
@@ -23,7 +25,7 @@ const LivePrice = ({ selectedStock }) => {
   return (
     <div className="bg-gray-200 p-4 rounded-md mt-4">
       <h3 className="text-lg font-bold">{selectedStock}</h3>
-      <p className="text-xl text-green-600">{price ? `$${price}` : "Loading..."}</p>
+      <p className="text-xl text-green-600">{price ? `$${parseFloat(price).toFixed(2)}` : "Loading..."}</p>
     </div>
   );
 };
