@@ -95,7 +95,6 @@ const Indicators = ({ selectedStock }) => {
         <li><strong>EMA 50:</strong> {indicators.EMA_50}</li>
         <li><strong>EMA 200:</strong> {indicators.EMA_200}</li>
         <li><strong>RSI:</strong> {indicators.RSI}</li>
-        <li><strong>Keltner Channel Middle:</strong> {indicators.Keltner}</li>
       </ul>
     </div>
   );

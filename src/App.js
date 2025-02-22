@@ -9,21 +9,21 @@ const App = () => {
   };
 
   return (
-    <div className="p-6">
-      <h1 className="text-3xl font-bold mb-4">BTrade</h1>
+    <div className="p-6 bg-gray-100 min-h-screen">
+      <h1 className="text-4xl font-bold mb-6 text-center text-gray-800">BTrade</h1>
 
-      {/* Search Bar for Stock Selection */}
-      <div className="mb-4">
+      {/* Search Bar */}
+      <div className="flex justify-center mb-6">
         <input
           type="text"
           placeholder="Enter stock symbol (e.g., AAPL, TSLA, BTC/USD)"
           value={selectedStock}
           onChange={handleStockChange}
-          className="p-2 border border-gray-400 rounded-md w-full"
+          className="p-3 border border-gray-300 rounded-lg shadow-md w-1/2 text-lg"
         />
       </div>
 
-      {/* Main Chart Component (Now Dynamic) */}
+      {/* Main Chart Component */}
       <MainChart selectedStock={selectedStock} />
     </div>
   );
