@@ -1,13 +1,12 @@
-import React from 'react';
-import './style.css';
+import React from "react";
+import MainChart from "./components/MainChart"; // Import the chart
 
-export default function App() {
+const App = () => {
   return (
-    <div>
-      <h1>Hello StackBlitz!</h1>
-      <p>Start editing to see some magic happen :)</p>
+    <div className="flex h-screen">
+      <MainChart />
     </div>
   );
-}
-<h1 className="text-3xl font-bold text-blue-500">Welcome to BTrade!</h1>;
+};
 
+export default App;
