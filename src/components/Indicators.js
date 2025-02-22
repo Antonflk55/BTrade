@@ -7,7 +7,6 @@ const Indicators = ({ selectedStock }) => {
     EMA_50: "Loading...",
     EMA_200: "Loading...",
     RSI: "Loading...",
-    Keltner: "Loading...",
   });
 
   useEffect(() => {
@@ -18,54 +17,24 @@ const Indicators = ({ selectedStock }) => {
         return;
       }
 
-      // Convert stock symbol format for Twelve Data API
       const formattedSymbol = selectedStock.includes(":")
         ? selectedStock.split(":")[1]
         : selectedStock;
 
       try {
-        // Fetch MACD
-        const macdResponse = await fetch(
-          `https://api.twelvedata.com/macd?symbol=${formattedSymbol}&interval=1day&apikey=${apiKey}`
-        );
-        const macdData = await macdResponse.json();
-        console.log("Twelve Data MACD response:", macdData);
-
-        // Fetch EMA 50
-        const ema50Response = await fetch(
-          `https://api.twelvedata.com/ema?symbol=${formattedSymbol}&interval=1day&time_period=50&apikey=${apiKey}`
-        );
-        const ema50Data = await ema50Response.json();
-        console.log("Twelve Data EMA 50 response:", ema50Data);
-
-        // Fetch EMA 200
-        const ema200Response = await fetch(
-          `https://api.twelvedata.com/ema?symbol=${formattedSymbol}&interval=1day&time_period=200&apikey=${apiKey}`
-        );
-        const ema200Data = await ema200Response.json();
-        console.log("Twelve Data EMA 200 response:", ema200Data);
-
-        // Fetch RSI
-        const rsiResponse = await fetch(
-          `https://api.twelvedata.com/rsi?symbol=${formattedSymbol}&interval=1day&apikey=${apiKey}`
-        );
-        const rsiData = await rsiResponse.json();
-        console.log("Twelve Data RSI response:", rsiData);
-
-        // Fetch Keltner Channels
-        const keltnerResponse = await fetch(
-          `https://api.twelvedata.com/keltner?symbol=${formattedSymbol}&interval=1day&apikey=${apiKey}`
-        );
-        const keltnerData = await keltnerResponse.json();
-        console.log("Twelve Data Keltner response:", keltnerData);
+        const [macdRes, ema50Res, ema200Res, rsiRes] = await Promise.all([
+          fetch(`https://api.twelvedata.com/macd?symbol=${formattedSymbol}&interval=1day&apikey=${apiKey}`).then((res) => res.json()),
+          fetch(`https://api.twelvedata.com/ema?symbol=${formattedSymbol}&interval=1day&time_period=50&apikey=${apiKey}`).then((res) => res.json()),
+          fetch(`https://api.twelvedata.com/ema?symbol=${formattedSymbol}&interval=1day&time_period=200&apikey=${apiKey}`).then((res) => res.json()),
+          fetch(`https://api.twelvedata.com/rsi?symbol=${formattedSymbol}&interval=1day&apikey=${apiKey}`).then((res) => res.json()),
+        ]);
 
         setIndicators({
-          MACD: macdData.values?.[0]?.macd || "N/A",
-          MACD_Signal: macdData.values?.[0]?.macd_signal || "N/A",
-          EMA_50: ema50Data.values?.[0]?.ema || "N/A",
-          EMA_200: ema200Data.values?.[0]?.ema || "N/A",
-          RSI: rsiData.values?.[0]?.rsi || "N/A",
-          Keltner: keltnerData.values?.[0]?.keltner_channel_middle || "N/A",
+          MACD: macdRes?.values?.[0]?.macd || "N/A",
+          MACD_Signal: macdRes?.values?.[0]?.macd_signal || "N/A",
+          EMA_50: ema50Res?.values?.[0]?.ema || "N/A",
+          EMA_200: ema200Res?.values?.[0]?.ema || "N/A",
+          RSI: rsiRes?.values?.[0]?.rsi || "N/A",
         });
       } catch (error) {
         console.error("Error fetching indicators:", error);
@@ -75,27 +44,41 @@ const Indicators = ({ selectedStock }) => {
           EMA_50: "Error",
           EMA_200: "Error",
           RSI: "Error",
-          Keltner: "Error",
         });
       }
     };
 
     fetchIndicators();
-    const interval = setInterval(fetchIndicators, 10000); // Refresh every 10 seconds
+    const interval = setInterval(fetchIndicators, 10000);
 
     return () => clearInterval(interval);
   }, [selectedStock]);
 
   return (
-    <div className="bg-white p-4 shadow-lg rounded-md mt-4">
-      <h3 className="text-lg font-bold">Technical Indicators</h3>
-      <ul className="mt-2">
-        <li><strong>MACD:</strong> {indicators.MACD}</li>
-        <li><strong>MACD Signal:</strong> {indicators.MACD_Signal}</li>
-        <li><strong>EMA 50:</strong> {indicators.EMA_50}</li>
-        <li><strong>EMA 200:</strong> {indicators.EMA_200}</li>
-        <li><strong>RSI:</strong> {indicators.RSI}</li>
-      </ul>
+    <div className="p-4 w-full max-w-md mx-auto">
+      <h3 className="text-lg font-bold text-gray-900 mb-4">Technical Indicators</h3>
+      <div className="grid grid-cols-2 gap-4 text-left">
+        <div className="flex flex-col">
+          <h4 className="text-gray-700 text-sm">MACD</h4>
+          <p className="text-lg font-semibold">{indicators?.MACD || "Loading..."}</p>
+        </div>
+        <div className="flex flex-col">
+          <h4 className="text-gray-700 text-sm">MACD Signal</h4>
+          <p className="text-lg font-semibold">{indicators?.MACD_Signal || "Loading..."}</p>
+        </div>
+        <div className="flex flex-col">
+          <h4 className="text-gray-700 text-sm">EMA 50</h4>
+          <p className="text-lg font-semibold">{indicators?.EMA_50 || "Loading..."}</p>
+        </div>
+        <div className="flex flex-col">
+          <h4 className="text-gray-700 text-sm">EMA 200</h4>
+          <p className="text-lg font-semibold">{indicators?.EMA_200 || "Loading..."}</p>
+        </div>
+        <div className="flex flex-col">
+          <h4 className="text-gray-700 text-sm">RSI</h4>
+          <p className="text-lg font-semibold">{indicators?.RSI || "Loading..."}</p>
+        </div>
+      </div>
     </div>
   );
 };

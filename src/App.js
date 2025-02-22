@@ -1,31 +1,28 @@
 import React, { useState } from "react";
+import DashboardLayout from "./components/DashboardLayout";
 import MainChart from "./components/MainChart";
+import LivePrice from "./components/LivePrice";
+import Indicators from "./components/Indicators";
+import NewsSentiment from "./components/NewsSentiment";
+import AIInsights from "./components/AIInsights";
 
 const App = () => {
-  const [selectedStock, setSelectedStock] = useState("AAPL"); // Default stock
-
-  const handleStockChange = (event) => {
-    setSelectedStock(event.target.value.toUpperCase()); // Convert input to uppercase for consistency
-  };
+  const [selectedStock, setSelectedStock] = useState("AAPL");
+  const [generalNews, setGeneralNews] = useState([]);
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
-      <h1 className="text-4xl font-bold mb-6 text-center text-gray-800">BTrade</h1>
-
-      {/* Search Bar */}
-      <div className="flex justify-center mb-6">
-        <input
-          type="text"
-          placeholder="Enter stock symbol (e.g., AAPL, TSLA, BTC/USD)"
-          value={selectedStock}
-          onChange={handleStockChange}
-          className="p-3 border border-gray-300 rounded-lg shadow-md w-1/2 text-lg"
-        />
-      </div>
-
-      {/* Main Chart Component */}
+    <DashboardLayout selectedStock={selectedStock} setSelectedStock={setSelectedStock}>
+      {/* Chart on the Left */}
       <MainChart selectedStock={selectedStock} />
-    </div>
+
+      {/* Everything Else in One Box on the Right (Limited Width) */}
+      <div className="w-full max-w-md">
+        <LivePrice selectedStock={selectedStock} />
+        <Indicators selectedStock={selectedStock} />
+        <NewsSentiment selectedStock={selectedStock} setGeneralNews={setGeneralNews} />
+        <AIInsights selectedStock={selectedStock} indicators={{}} generalNews={generalNews} />
+      </div>
+    </DashboardLayout>
   );
 };
 

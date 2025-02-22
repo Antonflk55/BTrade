@@ -60,7 +60,7 @@ const AIInsights = ({ selectedStock, indicators, generalNews }) => {
 
   return (
     <div className="bg-white p-4 shadow-lg rounded-md mt-4">
-      <h3 className="text-lg font-bold">AI-Generated Market Insights</h3>
+      <h3 className="text-lg font-bold">Market Insights</h3>
       <ul className="mt-2 list-disc pl-5">
         {insights.split("\n").map((line, index) => (
           <li key={index}>{line}</li>
