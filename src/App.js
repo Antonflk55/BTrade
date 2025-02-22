@@ -1,10 +1,14 @@
-import React from "react";
-import MainChart from "./components/MainChart"; // Import the chart
+import React, { useState } from "react";
+import Sidebar from "./components/Sidebar";
+import MainChart from "./components/MainChart";
 
 const App = () => {
+  const [selectedStock, setSelectedStock] = useState("NASDAQ:AAPL"); // Default to Apple
+
   return (
     <div className="flex h-screen">
-      <MainChart />
+      <Sidebar onSelectStock={setSelectedStock} />
+      <MainChart selectedStock={selectedStock} />
     </div>
   );
 };
