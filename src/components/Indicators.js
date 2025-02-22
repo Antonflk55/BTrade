@@ -25,15 +25,15 @@ const Indicators = ({ selectedStock }) => {
       <h3 className="text-lg font-bold">Technical Indicators</h3>
       {indicators ? (
         <ul className="mt-2">
-          <li>📈 **EMA (50):** {indicators.ema50}</li>
-          <li>📉 **EMA (200):** {indicators.ema200}</li>
-          <li>⚡ **RVI:** {indicators.rvi}</li>
-          <li>☁️ **Ichimoku Cloud:** {indicators.ichimoku}</li>
-          <li>📊 **Keltner Channels:** {indicators.keltner}</li>
-          <li>📈 **OBV:** {indicators.obv}</li>
+          <li>📈 <strong>EMA (50):</strong> {indicators.ema50}</li>
+          <li>📉 <strong>EMA (200):</strong> {indicators.ema200}</li>
+          <li>⚡ <strong>RVI:</strong> {indicators.rvi}</li>
+          <li>☁️ <strong>Ichimoku Cloud:</strong> {indicators.ichimoku}</li>
+          <li>📊 <strong>Keltner Channels:</strong> {indicators.keltner}</li>
+          <li>📈 <strong>OBV:</strong> {indicators.obv}</li>
         </ul>
       ) : (
-        <p className="text-gray-500">Loading...</p>
+        <p className="text-gray-500">Loading indicators...</p>
       )}
     </div>
   );
