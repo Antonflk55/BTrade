@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 
 const NewsSentiment = ({ selectedStock, setGeneralNews }) => {
-  const [news, setNews] = useState(null);
+  const [newsSummary, setNewsSummary] = useState("Fetching latest financial news...");
 
   useEffect(() => {
     const fetchNewsFromAI = async () => {
-      setNews("Loading news...");
       try {
         const response = await fetch("https://api.openai.com/v1/chat/completions", {
           method: "POST",
@@ -16,30 +15,32 @@ const NewsSentiment = ({ selectedStock, setGeneralNews }) => {
           body: JSON.stringify({
             model: "gpt-3.5-turbo",
             messages: [
-              { role: "user", content: `Fetch and summarize the most relevant financial news.
+              { role: "user", content: `You are a financial analyst. Fetch and summarize **ONLY the most relevant news** for the following:
 
-              **Stock-Specific News for ${selectedStock}:**
-              - Only include recent developments directly related to ${selectedStock}.
-              - Prioritize earnings reports, product launches, regulatory changes, and stock movements.
+              🔹 **Stock-Specific News**:
+              - Fetch recent developments **exclusively** related to ${selectedStock}.
+              - Prioritize earnings reports, product launches, CEO statements, stock movements, regulatory changes, and major company events.
+              - Ignore general finance news that does not directly relate to ${selectedStock}.
 
-              **Brief Market Overview:**
-              - Summarize any major financial news impacting the broader market (e.g., Federal Reserve decisions, tech sector performance, global economic events).
+              🔹 **Brief Market Overview**:
+              - Summarize any major financial news impacting the broader market **in one or two sentences**.
+              - This includes Federal Reserve decisions, tech sector performance, or major macroeconomic changes.
+
+              **Response Format:**
+              1️⃣ **Stock-Specific News** (For ${selectedStock}):
+              - [List and summarize the most critical recent news related to ${selectedStock}.]
               
-              **Response Format (Bullet Points):**
-              - **Stock-Specific News:**  
-                - [Summarize key events related to ${selectedStock}]
-              - **Market Overview (Brief Summary):**  
-                - [Summarize global financial events in 1-2 sentences]` }
+              2️⃣ **Market Overview** (Brief Summary):
+              - [Summarize in one or two sentences.]` }
             ],
           }),
         });
 
         const data = await response.json();
-        setNews(data.choices[0].message.content);
-        setGeneralNews(data.choices[0].message.content);
+        setNewsSummary(data.choices[0].message.content);
       } catch (error) {
         console.error("Error fetching financial news from ChatGPT:", error);
-        setNews("Error fetching news.");
+        setNewsSummary("Error fetching news.");
       }
     };
 
@@ -49,15 +50,7 @@ const NewsSentiment = ({ selectedStock, setGeneralNews }) => {
   return (
     <div className="bg-white p-4 shadow-lg rounded-md mt-4">
       <h3 className="text-lg font-bold">Latest Financial News</h3>
-      {news ? (
-        <ul className="mt-2 list-disc pl-5">
-          {news.split("\n").map((line, index) => (
-            <li key={index}>{line}</li>
-          ))}
-        </ul>
-      ) : (
-        <p className="text-gray-500">Loading news...</p>
-      )}
+      <p className="mt-2">{newsSummary}</p>
     </div>
   );
 };

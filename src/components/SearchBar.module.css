@@ -1,0 +1,12 @@
+/* SearchBar.module.css */
+.searchBar {
+    padding: 8px 15px;
+    border: 2px solid #e4e4e4; /* Light gray border */
+    border-radius: 20px; /* Rounded corners */
+    width: 100%;
+  }
+  
+  .searchBar:focus {
+    outline: none;
+    border-color: #0056b3; /* Blue border on focus */
+  }

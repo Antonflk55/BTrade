@@ -15,7 +15,7 @@
         "axios": "^1.7.9",
         "cors": "^2.8.5",
         "express": "^4.21.2",
-        "lightweight-charts": "^4.0.0",
+        "lightweight-charts": "^5.0.2",
         "lucide-react": "latest",
         "react": "^18.1.0",
         "react-dom": "^18.1.0"
@@ -14366,9 +14366,9 @@
       }
     },
     "node_modules/lightweight-charts": {
-      "version": "4.2.3",
-      "resolved": "https://registry.npmjs.org/lightweight-charts/-/lightweight-charts-4.2.3.tgz",
-      "integrity": "sha512-5kS/2hY3wNYNzhnS8Gb+GAS07DX8GPF2YVDnd2NMC85gJVQ6RLU6YrXNgNJ6eg0AnWPwCnvaGtYmGky3HiLQEw==",
+      "version": "5.0.2",
+      "resolved": "https://registry.npmjs.org/lightweight-charts/-/lightweight-charts-5.0.2.tgz",
+      "integrity": "sha512-sgPRVQcMn7zzO80E1hziL9LThKkGsBPQkwzN39oDIDKcTmzyIAZkqb+C/43JtzJfUcs+iFINaXQsvjy+TyB8rw==",
       "license": "Apache-2.0",
       "dependencies": {
         "fancy-canvas": "2.1.0"

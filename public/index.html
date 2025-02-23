@@ -1,1 +1,25 @@
-<div id="root"></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>BTrade</title>
+
+    <script type="text/javascript" src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+
+    <!-- Updated CSP with unsafe-inline allowed for scripts -->
+    <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://static.tradingview.com https://s3.tradingview.com https://embed.tradingview.com https://cdn.tradingview.com;
+    connect-src 'self' https://api.twelvedata.com https://api.openai.com https://s.tradingview.com https://s3.tradingview.com https://embed.tradingview.com;
+    frame-src 'self' https://s.tradingview.com https://embed.tradingview.com https://cdn.tradingview.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tradingview.com;
+    font-src 'self' https://fonts.gstatic.com https://cdn.tradingview.com;
+    img-src 'self' data: https://cdn.tradingview.com https://s3.tradingview.com;">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="root"></div>
+</body>
+</html>

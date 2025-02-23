@@ -7,6 +7,10 @@
     "@tailwindcss/cli": "^4.0.8",
     "@tailwindcss/postcss": "^4.0.8",
     "@tailwindui/react": "^0.1.1",
+    "axios": "^1.7.9",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "lightweight-charts": "^4.0.0",
     "lucide-react": "latest",
     "react": "^18.1.0",
     "react-dom": "^18.1.0"

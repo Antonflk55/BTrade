@@ -1,0 +1,21 @@
+/* Sidebar.module.css */
+.sidebar {
+    background-color: #233556; /* Dark blue background */
+    padding: 20px; /* Spacing inside the sidebar */
+    color: white; /* Text color */
+    height: 100vh; /* Full-height */
+    width: 250px; /* Fixed width */
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+  }
+  
+  .sidebar a {
+    color: #ffffff;
+    text-decoration: none; /* No underline */
+    margin: 10px 0; /* Spacing between links */
+    font-weight: 500; /* Font weight */
+  }
+  
+  .sidebar a:hover {
+    color: #a0a0a0; /* Hover effect */
+  }
